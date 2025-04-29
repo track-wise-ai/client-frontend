@@ -13,4 +13,4 @@ frontend:
     start:
       - npm install
       - npm run dev
-  subdomain: white-exuberant-mosquito
+  subdomain: trackwise
