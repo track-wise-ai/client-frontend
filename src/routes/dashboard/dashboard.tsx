@@ -7,6 +7,7 @@ import {
   Card,
   Table,
   Button,
+  Textarea,
   TableRow,
   TableBody,
   TableHead,
@@ -28,21 +29,19 @@ const Dashboard = () => {
 
   let generatedSumary = [];
 
-  console.log(">>> dashboard:", { actionData });
-
   try {
     const rawJson = (actionData?.choices || [])[0]?.message?.content || "[]";
     const cleaned = rawJson.match(/\[[\s\S]*]/)?.[0] || "[]";
 
     generatedSumary = JSON.parse(cleaned);
   } catch (error) {
-    //..
+    // nothing todo
   }
 
   const activities = generatedSumary.map(({ date, summary }) => (
     <Fragment key={date}>
       <Text weight="bold">{date}</Text>
-      <Text variant="muted" className="whitespace-normal wrap-break-word">{summary}</Text>
+      <Textarea >{summary}</Textarea>
     </Fragment>
   ));
 

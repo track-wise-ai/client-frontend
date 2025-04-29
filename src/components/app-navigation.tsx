@@ -8,7 +8,6 @@ import {
   DropdownMenuItem,
   DropdownMenuContent,
   DropdownMenuTrigger,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
 } from "@/components/ui";
 import { Logo } from "@/components/icons";
