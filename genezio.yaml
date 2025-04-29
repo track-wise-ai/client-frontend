@@ -1,0 +1,16 @@
+name: track-wise-frontend
+region: eu-central-1
+yamlVersion: 2
+frontend:
+  path: .
+  sdk:
+    language: ts
+  publish: dist
+  scripts:
+    deploy:
+      - npm install
+    build: npm run build
+    start:
+      - npm install
+      - npm run dev
+    subdomain: tan-variable-ferret
