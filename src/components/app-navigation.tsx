@@ -1,5 +1,7 @@
 import { Link } from "react-router";
 import { LogOut, Settings } from "lucide-react";
+import { useAuth } from "@/hooks";
+import { getUserInitials } from "@/lib";
 import {
   Avatar,
   AvatarImage,
@@ -13,6 +15,8 @@ import {
 import { Logo } from "@/components/icons";
 
 const AppNavigation = () => {
+  const { user } = useAuth();
+
   return (
     <div className="flex justify-between">
       <div>
@@ -23,7 +27,7 @@ const AppNavigation = () => {
           <DropdownMenuTrigger>
           <Avatar>
               <AvatarImage src="..." />
-              <AvatarFallback>IM</AvatarFallback>
+              <AvatarFallback>{getUserInitials(user)}</AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
 

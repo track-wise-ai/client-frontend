@@ -41,7 +41,7 @@ const Dashboard = () => {
   const activities = generatedSumary.map(({ date, summary }) => (
     <Fragment key={date}>
       <Text weight="bold">{date}</Text>
-      <Textarea >{summary}</Textarea>
+      <Textarea defaultValue={summary}/>
     </Fragment>
   ));
 
