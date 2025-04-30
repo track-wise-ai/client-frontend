@@ -8,13 +8,10 @@ import {
   SelectContent,
 } from "@/components/ui";
 import type { FC } from "react";
+import type { AIModels } from "@/types";
 
-type Model = {
-  title: string,
-  models: string[],
-};
 type Props = {
-  models: Record<string, Model>;
+  models: AIModels;
   onChange: (value: string) => void;
 };
 

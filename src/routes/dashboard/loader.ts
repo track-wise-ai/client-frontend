@@ -7,8 +7,6 @@ const loader: LoaderFunction = async () => {
     const { data: google } = await api("/google");
     const { data: ai } = await api("/ai");
 
-    // console.log(">>> dashboard:", data);
-
     return {
       events: (google?.events ?? []).filter(({ eventType }) => eventType !== "birthday"),
       aiModels: ai?.models ?? {},
