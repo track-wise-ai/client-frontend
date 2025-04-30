@@ -1,19 +1,18 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router";
-import Cookies from "js-cookie";
-import { TOKEN_KEY } from "@/constants";
-import { AppNavigation } from "@/components";
+import { useAuth } from "@/hooks";
+import { AppNavigation } from "@/components/app";
 
 const AppLayout = () => {
   const navigate = useNavigate();
+  const { getUser } = useAuth();
+  const user = getUser();
 
   useEffect(() => {
-    const token = Cookies.get(TOKEN_KEY);
-
-    if (!token) {
+    if (!user) {
       navigate("/login");
     }
-  }, [navigate]);
+  }, [user, navigate]);
 
   return (
     <>

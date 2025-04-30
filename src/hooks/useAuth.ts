@@ -1,32 +1,46 @@
-import { useEffect, useState } from "react";
+// import { useEffect } from "react";
 import Cookies from "js-cookie";
 import { decodeJwt } from "jose";
 import { TOKEN_KEY } from "@/constants";
 
-type UseAuth = () => void;
+type UseAuth = () => {
+  getUser: () => object|null;
+  logout: () => void;
+};
 
 const useAuth: UseAuth = () => {
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
+  const getUser = () => {
+    let user = null;
     const token = Cookies.get(TOKEN_KEY);
-    try {
-      if (!token) {
-        setUser(null);
-        return;
-      }
 
-      const data = decodeJwt(token);
+    if (token) {
+      try {
+        const data = decodeJwt(token);
 
-      if (data?.payload) {
-        setUser(data.payload);
+        if (data?.payload) {
+          user = data.payload;
+        }
+      } catch (error) {
+        // do nothimg
       }
-    } catch (error) {
-      setUser(null);
     }
-  }, []);
 
-  return { user };
+    return user;
+  };
+
+  const login = (token: string) => {
+    Cookies.set(TOKEN_KEY, res.data.token, {
+      path: "/",
+      expires: TOKEN_EXPIRES,
+      secure: !import.meta.env.DEV,
+    });
+  };
+
+  const logout = () => {
+    Cookies.remove(TOKEN_KEY, { path: "/", secure: !import.meta.env.DEV });
+  };
+
+  return { getUser, logout, login };
 };
 
 export { useAuth };

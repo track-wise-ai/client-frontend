@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { AxiosError } from "axios";
 import { useNavigate, isRouteErrorResponse, useRouteError } from "react-router";
+import { useAuth } from "@/hooks";
 import {
   Text,
   Heading,
@@ -12,12 +13,14 @@ import {
 const ErrorBoundary = () => {
   const error = useRouteError();
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
     if ((error instanceof AxiosError) && error.response?.status === 401) {
+      logout();
       navigate("/login");
     }
-  }, [error, navigate]);
+  }, [logout, error, navigate]);
 
   const title = isRouteErrorResponse(error)
     ? `${error.status} ${error.statusText}`

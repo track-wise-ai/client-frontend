@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
-import Cookies from "js-cookie"
-import { TOKEN_KEY } from "@/constants";
+import { useAuth } from "@/hooks";
 
 const Logout = () => {
   const navigate = useNavigate();
+  const { logout } = useAuth();
 
   useEffect(() => {
-    Cookies.remove(TOKEN_KEY, { path: "/", secure: !import.meta.env.DEV });
+    logout();
     navigate("/login");
-  }, [navigate]);
+  }, [logout, navigate]);
 
   return null;
 };

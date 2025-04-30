@@ -1,5 +1,5 @@
 import { Outlet } from "react-router";
-import { AuthNavigation } from "@/components";
+import { AuthNavigation } from "@/components/app";
 
 const AuthLayout = () => {
   return (

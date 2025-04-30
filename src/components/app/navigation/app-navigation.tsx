@@ -15,7 +15,8 @@ import {
 import { Logo } from "@/components/icons";
 
 const AppNavigation = () => {
-  const { user } = useAuth();
+  const { getUser } = useAuth();
+  const user = getUser();
 
   return (
     <div className="flex justify-between">
