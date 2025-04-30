@@ -1,13 +1,10 @@
-import { Fragment } from "react";
 import {
-  Text,
   Table,
   TableRow,
   TableBody,
+  TableCell,
   TableHead,
   TableHeader,
-  TableCell,
-  Textarea,
 } from "@/components/ui";
 import { Event } from "./event";
 import { Activitie } from "./activitie";

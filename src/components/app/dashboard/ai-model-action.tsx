@@ -13,7 +13,7 @@ type Props = {
 
 const AIModelAction: FC<Props> = ({ loading, models, onChange, onClickAction }) => {
   return (
-    <div className="flex justify-end mb-6 gap-3">
+    <div className="flex justify-end gap-3">
       <AIModelsSelect models={models} onChange={onChange} />
       <Button type="button" variant="outline" disabled={loading} onClick={onClickAction}>
         {loading

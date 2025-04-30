@@ -22,7 +22,7 @@ const Event: FC<Props> = ({ event, activities }) => {
         {format(startDate, "iii, dd.MM.yyyy")}<br />
         {format(startDate, "HH:mm")} - {endDate ? format(endDate, "HH:mm") : ".."}
       </TableCell>
-      <TableCell>
+      <TableCell className="whitespace-normal wrap-break-word">
         {event.summary}
         {event.description && (
           <Text variant="muted">{event.description}</Text>
