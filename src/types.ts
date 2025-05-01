@@ -17,3 +17,15 @@ export type Activitie = {
   date: string;
   summary: string;
 };
+
+export type GoogleCalendar = {
+  id: string;
+  summary: string;
+};
+
+export type GoogleCalendarSettings = {
+  connect: boolean;
+  authUrl: string;
+  calendars: GoogleCalendar[];
+  selectedCalendars: Array<GoogleCalendar["id"]>;
+};

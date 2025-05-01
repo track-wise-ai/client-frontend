@@ -13,30 +13,15 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui";
-import { MultiSelect } from "@/components/form"
+import { GoogleFields } from "./google-fields";
 import type { FC, ComponentProps } from "react";
-
-const ConnectService: FC<{ connect: boolean, link: string }> = ({ connect, link }) => {
-  return connect ? (
-    <Button type="button" asChild variant="success" disabled>
-      <a href={link ?? ""} target="_blank" aria-disabled><CheckCheck /> Connected</a>
-    </Button>
-  ) : (
-    <Button type="button" asChild variant="destructive">
-      <a href={link ?? ""} target="_blank"><Earth /> Connect</a>
-    </Button>
-  )
-};
+import type { GoogleCalendarSettings } from "@/types";
 
 const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
   const navigation = useNavigation();
-  const loaderData = useLoaderData();
+  const loaderData = useLoaderData<{ google: GoogleCalendarSettings }>();
   const isSubmitting = navigation.state === "submitting";
   const { google } = loaderData || {};
-  const options = (google?.calendars?? []).map((calendar) => ({
-    value: calendar.id,
-    label: calendar.summary,
-  }));
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -50,28 +35,27 @@ const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
             <Table>
               <TableBody>
                 <TableRow>
-                  <TableCell className="font-medium">Google Calendar:</TableCell>
+                  <TableCell className="font-medium w-36">Google Calendar:</TableCell>
                   <TableCell>
-                    <MultiSelect
-                      name="googleCalendars"
-                      options={options}
-                      defaultSelected={google?.selectedCalendars || []}
-                    />
-                    <ConnectService connect={google?.connect} link={google?.authUrl} />
+                    <GoogleFields google={google} />
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell className="font-medium">ChatGPT:</TableCell>
                   <TableCell>
-                    <ConnectService connect={false} link={"#"} />
+                    <Button type="button" asChild variant="destructive">
+                      <a href="#" target="_blank"><Earth /> Connect</a>
+                    </Button>
                   </TableCell>
                 </TableRow>
 
                 <TableRow>
                   <TableCell className="font-medium">Jira:</TableCell>
                   <TableCell>
-                    <ConnectService connect={false} link={"#"} />
+                    <Button type="button" asChild variant="destructive">
+                      <a href="#" target="_blank"><Earth /> Connect</a>
+                    </Button>
                   </TableCell>
                 </TableRow>
               </TableBody>
