@@ -1,5 +1,5 @@
 import { Form, useNavigation, useLoaderData } from "react-router";
-import { Earth, CheckCheck, LoaderCircle } from "lucide-react";
+import { Earth, LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils"
 import {
   Card,
@@ -14,12 +14,13 @@ import {
   CardDescription,
 } from "@/components/ui";
 import { GoogleFields } from "./google-fields";
+import { JiraFields } from "./jira-fields";
 import type { FC, ComponentProps } from "react";
-import type { GoogleCalendarSettings } from "@/types";
+import type { Settings } from "@/types";
 
 const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
   const navigation = useNavigation();
-  const loaderData = useLoaderData<{ google: GoogleCalendarSettings }>();
+  const loaderData = useLoaderData<Settings>();
   const isSubmitting = navigation.state === "submitting";
   const { google } = loaderData || {};
 
@@ -53,9 +54,7 @@ const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
                 <TableRow>
                   <TableCell className="font-medium">Jira:</TableCell>
                   <TableCell>
-                    <Button type="button" asChild variant="destructive">
-                      <a href="#" target="_blank"><Earth /> Connect</a>
-                    </Button>
+                    <JiraFields jira={loaderData.jira}/>
                   </TableCell>
                 </TableRow>
               </TableBody>

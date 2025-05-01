@@ -24,8 +24,23 @@ export type GoogleCalendar = {
 };
 
 export type GoogleCalendarSettings = {
-  connect: boolean;
   authUrl: string;
   calendars: GoogleCalendar[];
-  selectedCalendars: Array<GoogleCalendar["id"]>;
+};
+
+export type UserSettings = {
+  google: {
+    connect: boolean;
+    selectedCalendars: Array<GoogleCalendar["id"]>;
+  },
+  jira: {
+    url: string;
+    apiKey: string;
+    issueKey: string;
+  },
+};
+
+export type Settings = {
+  google: GoogleCalendarSettings & UserSettings["google"];
+  jira: UserSettings["jira"];
 };

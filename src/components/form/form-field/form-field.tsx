@@ -1,11 +1,9 @@
 import { Input, Label } from "@/components/ui";
 import type { FC, ComponentProps } from "react";
 
-type Props = {
+type Props = ComponentProps<"input"> & {
   id: string;
   label: string;
-  type: ComponentProps<"input">["type"];
-  placeholder?: ComponentProps<"input">["placeholder"];
 };
 
 const FormField: FC<Props> = ({
@@ -16,8 +14,8 @@ const FormField: FC<Props> = ({
   ...props
 }) => {
   return (
-    <div className="grid gap-3">
-      <Label htmlFor={id}>{label}</Label>
+    <div className="grid gap-1 mb-3">
+      <Label htmlFor={id} className="text-xs text-muted-foreground">{label}</Label>
       <Input
         id={id}
         name={id}
