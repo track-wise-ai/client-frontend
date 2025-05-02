@@ -13,7 +13,7 @@ export type Event = {
   description: string;
 };
 
-export type Activitie = {
+export type Activity = {
   date: string;
   summary: string;
 };
@@ -44,3 +44,13 @@ export type Settings = {
   google: GoogleCalendarSettings & UserSettings["google"];
   jira: UserSettings["jira"];
 };
+
+export type DateKey = string; // YYYY-MM-DD
+
+export type TrackItem = {
+  date: Date;
+  events: Event[];
+  activity: Activity|null;
+};
+
+export type Track = Record<DateKey, TrackItem>;

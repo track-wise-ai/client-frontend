@@ -39,7 +39,7 @@ const textVariants = cva(
   {
     variants: {
       variant: {
-        default: "leading-7 [&:not(:first-child)]:mt-6",
+        default: "leading-7",
         lead: "text-xl text-muted-foreground",
         large: "text-lg font-semibold",
         small: "text-sm font-medium leading-none",

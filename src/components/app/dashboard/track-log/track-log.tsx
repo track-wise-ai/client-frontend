@@ -5,39 +5,42 @@ import {
   TableCell,
   TableHead,
   TableHeader,
+  Checkbox,
 } from "@/components/ui";
-import { Event } from "./event";
-import { Activitie } from "./activitie";
+import { Events } from "./events";
+import { Activity } from "./activity";
 import type { FC } from "react";
-import type { Event as TEvent, Activitie as TActivitie } from "@/types";
+import type { Track } from "@/types";
 
 type Props = {
-  events: TEvent[];
-  activities: TActivitie[];
+  track: Track;
 };
 
-const TrackLog: FC<Props> = ({ events, activities }) => {
+const TrackLog: FC<Props> = ({ track }) => {
   return (
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead className="w-32">Date:</TableHead>
-          <TableHead className="w-80">Google Calendar</TableHead>
-          <TableHead>AI</TableHead>
+          <TableHead className="w-8"></TableHead>
+          <TableHead className="w-1/2">Google Calendar</TableHead>
+          <TableHead className="w-1/2">AI</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
-        {(events ?? []).map((event, idx) => (
-          <Event key={idx} event={event} activities={
-            (idx === 0) && (
-              <TableCell rowSpan={events.length} style={{ verticalAlign: "top" }}>
-                {activities.map((activitie) => (
-                  <Activitie key={activitie.date} activitie={activitie}/>
-                ))}
+        {Object.keys(track).map((dateKey) => {
+          const { activity, events } = track[dateKey];
+          return (
+            <TableRow key={dateKey}>
+              <TableCell className="align-top">
+                <Checkbox name="selectedActivities" defaultChecked value={dateKey}/>
               </TableCell>
-            )
-          } />
-        ))}
+              <TableCell><Events events={events} /></TableCell>
+              <TableCell>
+                {activity && <Activity activity={activity} />}
+              </TableCell>
+            </TableRow>
+          )
+        })}
       </TableBody>
     </Table>
   );

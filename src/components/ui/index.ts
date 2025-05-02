@@ -15,3 +15,4 @@ export * from "./popover";
 export * from "./select";
 export * from "./textarea";
 export * from "./date-range";
+export * from "./checkbox";

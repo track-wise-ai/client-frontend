@@ -15,7 +15,8 @@ import {
   CardContent,
 } from "@/components/ui";
 import { AIModelAction, TrackLog, CalendarRange } from "@/components/app/dashboard";
-import type { DateRange } from "react-day-picker"
+import { normalizeTrack } from "./utils";
+import type { DateRange } from "react-day-picker";
 
 const Dashboard = () => {
   const [searchParams] = useSearchParams();
@@ -29,9 +30,11 @@ const Dashboard = () => {
   const [aiModel, setAiModel] = useState("");
   const [range, setRange] = useState<DateRange|null>(null);
 
-  const events = loaderData.events || [];
-  const aiModels = loaderData.aiModels || [];
+  const events = loaderData?.events || [];
+  const aiModels = loaderData?.aiModels || [];
   const activites = isSubmitting ? [] : actionData?.activites || [];
+
+  const track = normalizeTrack(events, activites);
 
   const onSubmitAIGenerate = () => {
     if (!aiModel || isSubmitting) return;
@@ -80,7 +83,7 @@ const Dashboard = () => {
             onClickAction={onSubmitAIGenerate}
           />
         </div>
-        <TrackLog activities={activites} events={events} />
+        <TrackLog track={track} />
       </CardContent>
     </Card>
   );
