@@ -1,4 +1,4 @@
-import { Play, LoaderCircle } from "lucide-react";
+import { LoaderCircle, WandSparkles } from "lucide-react";
 import { Button } from "@/components/ui";
 import { AIModelsSelect } from "@/components/form";
 import type { FC } from "react";
@@ -18,7 +18,7 @@ const AIModelAction: FC<Props> = ({ loading, models, onChange, onClickAction }) 
       <Button type="button" variant="outline" disabled={loading} onClick={onClickAction}>
         {loading
           ? <LoaderCircle className="animate-spin" />
-          : <Play />
+          : <WandSparkles />
         }
       </Button>
     </div>

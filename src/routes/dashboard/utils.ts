@@ -16,8 +16,8 @@ const normalizeTrack: NormalizeTrack = (events, activites) => {
     if (!acc[dateKey]) {
       acc[dateKey] = {
         date: startDate,
-        activity: null,
         events: [],
+        activity: { date: dateKey, summary: "" },
       }
     }
 

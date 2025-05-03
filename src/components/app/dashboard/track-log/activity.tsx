@@ -11,7 +11,7 @@ const Activity: FC<Props> = ({ activity }) => {
   return (
     <Fragment key={activity.date}>
       <Text weight="bold">{activity.date}</Text>
-      <Textarea defaultValue={activity.summary} />
+      <Textarea name={activity.date} defaultValue={activity.summary} />
     </Fragment>
   );
 };

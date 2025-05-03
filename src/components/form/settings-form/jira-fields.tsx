@@ -9,9 +9,9 @@ type Props = {
 const JiraFields: FC<Props> = ({ jira }) => {
   return (
     <>
-      <FormField id="jiraUrl" type="text" label="Jira Url" value={jira.url} />
-      <FormField id="jiraApiKey" type="text" label="Jira Api Key" value={jira.apiKey} />
-      <FormField id="jiraIssueKey" type="text" label="Jira Issue Key"  value={jira.issueKey} />
+      <FormField id="jiraUrl" type="text" label="Jira Url" defaultValue={jira.url} />
+      <FormField id="jiraApiKey" type="text" label="Jira Api Key" defaultValue={jira.apiKey} />
+      <FormField id="jiraIssueKey" type="text" label="Jira Issue Key"  defaultValue={jira.issueKey} />
     </>
   );
 };
