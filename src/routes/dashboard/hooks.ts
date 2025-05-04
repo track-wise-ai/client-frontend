@@ -3,23 +3,23 @@ import { toast } from "sonner";
 import { api } from "@/api";
 import type { Activity, Event } from "@/types";
 
-type useActivities = {
+type UseActivities = () => {
   loading: boolean;
   activites: Activity[];
-  generateActivites: (aiModel: string, events: Event[]) => Promise<void>;
+  generateActivites: (events: Event[]) => Promise<void>;
 }
 
-const useActivities = () => {
+const useActivities: UseActivities = () => {
   const [activites, setActivites] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
 
-  const generateActivites = async (model: string, events: Event[]) => {
+  const generateActivites = async (events: Event[]) => {
     setActivites([]);
     setLoading(true);
     let res = null;
 
     try {
-      res = await api.post("/ai", { model, events });
+      res = await api.post("/ai", { events });
     } catch (error) {
       console.error(error);
       toast.error("Failed to save generated activites. Please try again.");

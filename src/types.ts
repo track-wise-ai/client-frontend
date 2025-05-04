@@ -7,6 +7,7 @@ export type AIModels = Record<string, AIModel>;
 
 export type Event = {
   id: string;
+  eventType: string;
   start: { dateTime?: string, date: string };
   end: { dateTime?: string, date: string };
   summary: string;
@@ -38,11 +39,16 @@ export type UserSettings = {
     apiKey: string;
     issueKey: string;
   },
+  ai: {
+    models: AIModels;
+    selectedModel: string;
+  },
 };
 
 export type Settings = {
   google: GoogleCalendarSettings & UserSettings["google"];
   jira: UserSettings["jira"];
+  ai: UserSettings["ai"];
 };
 
 export type DateKey = string; // YYYY-MM-DD

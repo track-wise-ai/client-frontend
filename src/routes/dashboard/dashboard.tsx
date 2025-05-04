@@ -4,7 +4,6 @@ import {
   Form,
   useSubmit,
   useNavigate,
-  useActionData,
   useLoaderData,
   useNavigation,
   useSearchParams,
@@ -27,18 +26,15 @@ const Dashboard = () => {
   const loaderData = useLoaderData();
   const navigation = useNavigation();
   const submit = useSubmit();
-  const actionData = useActionData();
   const isSubmitting = navigation.state === "submitting";
   const isLoading = navigation.state === "loading";
   const { loading: isLoadingActivites, activites, generateActivites } = useActivities();
-  const [aiModel, setAiModel] = useState("");
   const [range, setRange] = useState<DateRange|null>(null);
   const events = loaderData?.events || [];
-  const aiModels = loaderData?.aiModels || [];
   const track = normalizeTrack(events, activites);
 
   const onSubmitAIGenerate = () => {
-    if (!aiModel || isLoadingActivites) return;
+    if (isLoadingActivites) return;
 
     const preparedEvents = events.map((event: Event) => ({
       id: event.id,
@@ -48,7 +44,7 @@ const Dashboard = () => {
       description: event.description,
     }));
 
-    generateActivites(aiModel, preparedEvents);
+    generateActivites(preparedEvents);
   };
 
   const onFetchEvents = () => {
@@ -96,8 +92,6 @@ const Dashboard = () => {
 
             <AIModelAction
               loading={isLoadingActivites}
-              models={aiModels}
-              onChange={setAiModel}
               onClickAction={onSubmitAIGenerate}
             />
 

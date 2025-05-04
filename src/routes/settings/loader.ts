@@ -11,7 +11,7 @@ const loader: LoaderFunction = async () => {
     return {
       google: { ...googleSettings, ...userSettings.google },
       jira: userSettings.jira,
-      ai: { connect: false },
+      ai: userSettings.ai,
     };
   } catch (error) {
     toast.error(error?.message ?? error?.toString());

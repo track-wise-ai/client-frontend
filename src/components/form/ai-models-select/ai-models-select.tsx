@@ -12,12 +12,12 @@ import type { AIModels } from "@/types";
 
 type Props = {
   models: AIModels;
-  onChange: (value: string) => void;
+  selectedModel: string;
 };
 
-const AIModelsSelect: FC<Props> = ({ models, onChange }) => {
+const AIModelsSelect: FC<Props> = ({ models, selectedModel }) => {
   return (
-    <Select name="aiModel" onValueChange={onChange}>
+    <Select name="aiModel" defaultValue={selectedModel}>
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select a model"/>
       </SelectTrigger>

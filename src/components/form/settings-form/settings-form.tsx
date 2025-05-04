@@ -15,6 +15,7 @@ import {
 } from "@/components/ui";
 import { GoogleFields } from "./google-fields";
 import { JiraFields } from "./jira-fields";
+import { AIFields } from "./ai-fields";
 import type { FC, ComponentProps } from "react";
 import type { Settings } from "@/types";
 
@@ -22,7 +23,7 @@ const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
   const navigation = useNavigation();
   const loaderData = useLoaderData<Settings>();
   const isSubmitting = navigation.state === "submitting";
-  const { google } = loaderData || {};
+  const { google, ai } = loaderData || {};
 
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
@@ -43,11 +44,9 @@ const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
                 </TableRow>
 
                 <TableRow>
-                  <TableCell className="font-medium">ChatGPT:</TableCell>
+                  <TableCell className="font-medium">AI:</TableCell>
                   <TableCell>
-                    <Button type="button" asChild variant="destructive">
-                      <a href="#" target="_blank"><Earth /> Connect</a>
-                    </Button>
+                    <AIFields ai={ai} />
                   </TableCell>
                 </TableRow>
 
