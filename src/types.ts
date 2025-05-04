@@ -36,8 +36,10 @@ export type UserSettings = {
   },
   jira: {
     url: string;
-    apiKey: string;
     issueKey: string;
+    authType: "bearer" | "basic";
+    email: string;
+    apiKey: string;
   },
   ai: {
     models: AIModels;

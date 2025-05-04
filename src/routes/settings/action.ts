@@ -9,6 +9,8 @@ const action: ActionFunction = async ({ request }) => {
     jiraUrl: formData.get("jiraUrl"),
     jiraApiKey: formData.get("jiraApiKey"),
     jiraIssueKey: formData.get("jiraIssueKey"),
+    jiraAuthType: formData.get("jiraAuthType"),
+    jiraEmail: formData.get("jiraEmail"),
     aiModel: formData.get("aiModel"),
   };
 
