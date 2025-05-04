@@ -12,7 +12,7 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from "@/components/ui";
-import { Logo } from "@/components/icons";
+import { FullLogo } from "@/components/icons";
 
 const AppNavigation = () => {
   const { getUser } = useAuth();
@@ -21,7 +21,7 @@ const AppNavigation = () => {
   return (
     <div className="flex justify-between">
       <div>
-        <Link to="/"><Logo/></Link>
+        <Link to="/"><FullLogo/></Link>
       </div>
       <div>
         <DropdownMenu>
