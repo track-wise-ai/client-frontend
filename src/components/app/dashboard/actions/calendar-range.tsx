@@ -1,8 +1,8 @@
 import { Play, LoaderCircle } from "lucide-react";
-import { Button, DatePickerWithRange } from "@/components/ui";
+import { Button, DatePickerWithRange, Props as DatePickerWithRangeProps } from "@/components/ui";
 import type { FC } from "react";
 
-type Props = typeof DatePickerWithRange & {
+export type Props = DatePickerWithRangeProps & {
   loading: boolean;
   onClick: () => void;
 };

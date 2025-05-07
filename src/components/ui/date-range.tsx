@@ -19,7 +19,7 @@ type Value = {
   to: Date
 };
 
-type Props = React.HTMLAttributes<HTMLDivElement> & {
+export type Props = React.HTMLAttributes<HTMLDivElement> & {
   defaultValue?: Partial<Value>;
   onChange?: (value: DateRange | undefined) => void
 };

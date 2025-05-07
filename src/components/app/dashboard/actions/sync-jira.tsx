@@ -2,7 +2,7 @@ import { RefreshCw, LoaderCircle } from "lucide-react";
 import { Button } from "@/components/ui";
 import type { FC } from "react";
 
-type Props = {
+export type Props = {
   loading: boolean;
 };
 

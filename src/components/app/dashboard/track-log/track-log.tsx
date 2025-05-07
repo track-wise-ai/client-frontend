@@ -18,31 +18,33 @@ type Props = {
 
 const TrackLog: FC<Props> = ({ track }) => {
   return (
-    <Table>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-8"></TableHead>
-          <TableHead className="w-1/2">Google Calendar</TableHead>
-          <TableHead className="w-1/2">AI</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {Object.keys(track).map((dateKey) => {
-          const { activity, events } = track[dateKey];
-          return (
-            <TableRow key={dateKey}>
-              <TableCell className="align-top">
-                <Checkbox name="selectedActivities" defaultChecked value={dateKey}/>
-              </TableCell>
-              <TableCell><Events events={events} /></TableCell>
-              <TableCell>
-                {activity && <Activity activity={activity} />}
-              </TableCell>
-            </TableRow>
-          )
-        })}
-      </TableBody>
-    </Table>
+    <div className="w-full">
+      <Table className="table-fixed">
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-8"></TableHead>
+            <TableHead className="w-1/2">Google Calendar</TableHead>
+            <TableHead className="">AI</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {Object.keys(track).map((dateKey) => {
+            const { activity, events } = track[dateKey];
+            return (
+              <TableRow key={dateKey}>
+                <TableCell className="align-top">
+                  <Checkbox name="selectedActivities" defaultChecked value={dateKey} />
+                </TableCell>
+                <TableCell className="w-1/2 break-words"><Events events={events} /></TableCell>
+                <TableCell className="w-1/2 break-words">
+                  {activity && <Activity activity={activity} />}
+                </TableCell>
+              </TableRow>
+            )
+          })}
+        </TableBody>
+      </Table>
+    </div>
   );
 };
 

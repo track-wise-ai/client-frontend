@@ -14,7 +14,7 @@ import {
   CardHeader,
   CardContent,
 } from "@/components/ui";
-import { AIModelAction, TrackLog, CalendarRange, SyncJira } from "@/components/app/dashboard";
+import { TrackLog, Actions } from "@/components/app/dashboard";
 import { useActivities } from "./hooks";
 import { normalizeTrack } from "./utils";
 import type { DateRange } from "react-day-picker";
@@ -83,20 +83,14 @@ const Dashboard = () => {
       </CardHeader>
       <CardContent>
         <Form onSubmit={onSubmitSyncJira}>
-          <div className="flex justify-between">
-            <CalendarRange
-              onChange={setRange}
-              onClick={onFetchEvents}
-              loading={isLoading}
-            />
-
-            <AIModelAction
-              loading={isLoadingActivites}
-              onClickAction={onSubmitAIGenerate}
-            />
-
-            <SyncJira loading={isSubmitting} />
-          </div>
+          <Actions
+            onChangeRange={setRange}
+            onFetchEvents={onFetchEvents}
+            isLoading={isLoading}
+            isLoadingActivites={isLoadingActivites}
+            onSubmitAIGenerate={onSubmitAIGenerate}
+            isSubmitting={isSubmitting}
+          />
           <TrackLog track={track} />
         </Form>
       </CardContent>

@@ -17,9 +17,9 @@ const Event: FC<Props> = ({ event }) => {
         {format(startDate, "iii, dd MMM")},{" "}
         {format(startDate, "HH:mm")} - {endDate ? format(endDate, "HH:mm") : ".."}
       </Text>
-      <Text>{event.summary}</Text>
+      <Text className="text-wrap text-clip">{event.summary}</Text>
       {event.description && (
-        <Text variant="muted">{event.description}</Text>
+        <Text variant="muted" className="overflow-hidden text-ellipsis">{event.description}</Text>
       )}
     </>
   )
