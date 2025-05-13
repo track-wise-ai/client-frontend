@@ -29,7 +29,7 @@ const TrackLog: FC<Props> = ({ track }) => {
         </TableHeader>
         <TableBody>
           {Object.keys(track).map((dateKey) => {
-            const { activity, events } = track[dateKey];
+            const { activity, events } = track[dateKey] || {};
             return (
               <TableRow key={dateKey}>
                 <TableCell className="align-top">

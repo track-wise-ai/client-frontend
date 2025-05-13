@@ -17,6 +17,7 @@ import {
 import { TrackLog, Actions } from "@/components/app/dashboard";
 import { useActivities } from "./hooks";
 import { normalizeTrack } from "./utils";
+import type { FormEvent } from "react";
 import type { DateRange } from "react-day-picker";
 import type { Event } from "@/types";
 
@@ -29,7 +30,7 @@ const Dashboard = () => {
   const isSubmitting = navigation.state === "submitting";
   const isLoading = navigation.state === "loading";
   const { loading: isLoadingActivites, activites, generateActivites } = useActivities();
-  const [range, setRange] = useState<DateRange|null>(null);
+  const [range, setRange] = useState<DateRange|undefined>();
   const events = loaderData?.events || [];
   const track = normalizeTrack(events, activites);
 
@@ -57,10 +58,10 @@ const Dashboard = () => {
     navigate(`?${newSearchParams.toString()}`, { replace: true });
   };
 
-  const onSubmitSyncJira = (e) => {
+  const onSubmitSyncJira = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const formData = new FormData(e.target);
+    const formData = new FormData(e.target as HTMLFormElement);
     const selectedDateKeys = formData.getAll("selectedActivities");
     const trackLogs = activites
       // filter activites by selected dates

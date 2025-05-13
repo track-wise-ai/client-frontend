@@ -7,7 +7,7 @@ const action: ActionFunction = async ({ request }) => {
   const trackLog = formData.get("trackLog");
 
   try {
-    await api.post("/jira/sync", { trackLog });
+    await api.post("/jira/worklogs", { trackLog });
     toast.success("Jira synced successfully.");
   } catch (error) {
     console.error(error);

@@ -17,7 +17,7 @@ type Props = {
 
 const JiraFields: FC<Props> = ({ jira }) => {
   const [jiraAuthType, setJiraAuthType] = useState<string>(jira.authType);
-  console.log(">>> jira:", jira);
+
   return (
     <>
       <FormField id="jiraUrl" type="text" label="Jira Url" defaultValue={jira.url} />
