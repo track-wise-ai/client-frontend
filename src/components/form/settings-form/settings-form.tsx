@@ -1,5 +1,5 @@
 import { Form, useNavigation, useLoaderData } from "react-router";
-import { Earth, LoaderCircle } from "lucide-react";
+import { LoaderCircle } from "lucide-react";
 import { cn } from "@/lib/utils"
 import {
   Card,
@@ -53,7 +53,7 @@ const SettingsForm: FC<ComponentProps<"div">> = ({ className, ...props }) => {
                 <TableRow>
                   <TableCell className="font-medium">Jira:</TableCell>
                   <TableCell>
-                    <JiraFields jira={loaderData.jira}/>
+                    <JiraFields jira={loaderData?.jira}/>
                   </TableCell>
                 </TableRow>
               </TableBody>

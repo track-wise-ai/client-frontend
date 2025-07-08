@@ -4,6 +4,18 @@ import type { ActionFunction } from "react-router";
 
 const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
+  const aiSettings = `${formData.get("aiModel") || '{}'}`;
+  let aiModel = '';
+  let aiProvider = '';
+
+  try {
+    const parsedAiSettings = JSON.parse(aiSettings);
+    aiModel = parsedAiSettings.model;
+    aiProvider = parsedAiSettings.provider;
+  } catch {
+    //..
+  }
+
   const settings = {
     googleCalendars: formData.getAll("googleCalendars"),
     jiraUrl: formData.get("jiraUrl"),
@@ -11,7 +23,8 @@ const action: ActionFunction = async ({ request }) => {
     jiraIssueKey: formData.get("jiraIssueKey"),
     jiraAuthType: formData.get("jiraAuthType"),
     jiraEmail: formData.get("jiraEmail"),
-    aiModel: formData.get("aiModel"),
+    aiModel,
+    aiProvider,
   };
 
   try {

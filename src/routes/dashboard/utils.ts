@@ -9,7 +9,7 @@ type NormalizeTrack = (
 const DATE_KEY_PATTERN = "yyyy-MM-dd";
 
 const normalizeTrack: NormalizeTrack = (events, activites) => {
-  const groupedEvents = events.reduce((acc, event) => {
+  const groupedEvents = events.reduce<Track>((acc, event) => {
     const startDate = new Date(event.start.dateTime || event.start.date);
     const dateKey: DateKey = format(startDate, DATE_KEY_PATTERN);
 
@@ -28,7 +28,10 @@ const normalizeTrack: NormalizeTrack = (events, activites) => {
 
   activites.forEach((activity) => {
     const dateKey: DateKey = activity.date;
-    groupedEvents[dateKey].activity = activity;
+
+    if (groupedEvents[dateKey]) {
+      groupedEvents[dateKey].activity = activity;
+    }
   });
 
   return groupedEvents;

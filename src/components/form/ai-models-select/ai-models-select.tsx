@@ -8,28 +8,37 @@ import {
   SelectContent,
 } from "@/components/ui";
 import type { FC } from "react";
-import type { AIModels } from "@/types";
+import type { UserSettings } from "@/types";
 
-type Props = {
-  models: AIModels;
-  selectedModel: string;
-};
+type Props = UserSettings['ai'];
 
-const AIModelsSelect: FC<Props> = ({ models, selectedModel }) => {
+const AIModelsSelect: FC<Props> = ({ models = {}, selectedModel, selectedProvider } = {}) => {
+  const providers = Object.keys(models);
+  const selectedValue = (selectedModel && selectedProvider)
+    ? JSON.stringify({ model: selectedModel, provider: selectedProvider })
+    : undefined;
+
   return (
-    <Select name="aiModel" defaultValue={selectedModel}>
+    <Select name="aiModel" defaultValue={selectedValue}>
       <SelectTrigger className="w-[280px]">
         <SelectValue placeholder="Select a model"/>
       </SelectTrigger>
       <SelectContent position="popper" align="end">
-        {Object.keys(models).map((provider) => (
-          <SelectGroup key={provider}>
-            <SelectLabel>{models[provider]["title"]}</SelectLabel>
-            {models[provider]["models"].map((model) => (
-              <SelectItem key={model} value={model}>{model}</SelectItem>
-            ))}
-          </SelectGroup>
-        ))}
+        {(providers.length > 0)
+          ? Object.keys(models).map((provider) => (
+            <SelectGroup key={provider}>
+              <SelectLabel>{models[provider]["title"]}</SelectLabel>
+              {models[provider]["models"].map((model) => (
+                <SelectItem key={model} value={JSON.stringify({ model, provider })}>{model}</SelectItem>
+              ))}
+            </SelectGroup>
+          ))
+          : (
+            <SelectGroup>
+              <SelectLabel>No items</SelectLabel>
+            </SelectGroup>
+          )
+        }
       </SelectContent>
     </Select>
   );

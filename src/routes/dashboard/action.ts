@@ -4,10 +4,11 @@ import type { ActionFunction } from "react-router";
 
 const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData();
-  const trackLog = formData.get("trackLog");
+  const worklog = formData.get("trackLog");
 
   try {
-    await api.post("/jira/worklogs", { trackLog });
+    // todo: fix this worst approach
+    await api.post("/jira/worklog", { worklog: JSON.parse(`${worklog}` || '[]') });
     toast.success("Jira synced successfully.");
   } catch (error) {
     console.error(error);

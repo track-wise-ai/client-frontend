@@ -1,10 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { format, startOfWeek, endOfWeek } from "date-fns"
+import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { DateRange } from "react-day-picker"
-import { cn } from "@/lib/utils"
+import { cn, getStartOfWeek, getEndOfWeek } from "@/lib"
 import { Button } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
@@ -28,8 +28,8 @@ export function DatePickerWithRange({
   className, onChange, defaultValue,
 }: Props) {
   const [date, setDate] = React.useState<DateRange | undefined>({
-    from: defaultValue?.from || startOfWeek(new Date(), { weekStartsOn: 1 }), // Monday as start of week,
-    to: defaultValue?.to || endOfWeek(new Date(), { weekStartsOn: 1 }), // Sunday as end of week,
+    from: defaultValue?.from || getStartOfWeek(),
+    to: defaultValue?.to || getEndOfWeek(),
   });
 
   React.useEffect(() => {

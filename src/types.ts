@@ -1,3 +1,10 @@
+export type User = {
+  email: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+};
+
 export type AIModel = {
   title: string,
   models: string[],
@@ -25,33 +32,34 @@ export type GoogleCalendar = {
 };
 
 export type GoogleCalendarSettings = {
-  authUrl: string;
-  calendars: GoogleCalendar[];
+  authUrl?: string;
+  calendars?: GoogleCalendar[];
 };
 
-export type UserSettings = {
+export type UserSettings = Partial<{
   google: {
-    connect: boolean;
-    selectedCalendars: Array<GoogleCalendar["id"]>;
+    connect?: boolean;
+    selectedCalendars?: Array<GoogleCalendar["id"]>;
   },
   jira: {
-    url: string;
-    issueKey: string;
-    authType: "bearer" | "basic";
-    email: string;
-    apiKey: string;
+    url?: string;
+    issueKey?: string;
+    authType?: "bearer" | "basic";
+    email?: string;
+    apiKey?: string;
   },
   ai: {
-    models: AIModels;
-    selectedModel: string;
+    models?: AIModels;
+    selectedModel?: string;
+    selectedProvider?: string;
   },
-};
+}>;
 
-export type Settings = {
+export type Settings = Partial<{
   google: GoogleCalendarSettings & UserSettings["google"];
   jira: UserSettings["jira"];
   ai: UserSettings["ai"];
-};
+}>;
 
 export type DateKey = string; // YYYY-MM-DD
 

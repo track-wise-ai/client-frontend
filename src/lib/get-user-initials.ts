@@ -1,9 +1,4 @@
-type User = {
-  email: string;
-  firstName: string;
-  lastName: string;
-  role: string;
-};
+import { User } from '@/types';
 
 const getUserInitials = (user: User|null): string => {
   const initials = [];

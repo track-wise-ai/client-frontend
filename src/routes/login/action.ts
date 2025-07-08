@@ -1,7 +1,7 @@
 import { redirect } from "react-router";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
-import { TOKEN_EXPIRES, TOKEN_KEY } from "@/constants";
+import { TOKEN_EXPIRES, ACCESS_TOKEN_KEY } from "@/constants";
 import { api } from "@/api";
 import type { ActionFunction } from "react-router";
 
@@ -13,12 +13,18 @@ const action: ActionFunction = async ({ request }) => {
   };
 
   try {
-    const res = await api("/login", {
+    const res = await api("/auth/login", {
       method: "POST",
       data: credentials,
     });
 
-    Cookies.set(TOKEN_KEY, res.data.token, {
+    const { accessToken } = res.data || {};
+
+    if (!accessToken) {
+      throw new Error("Failed to decode authentication token");
+    }
+
+    Cookies.set(ACCESS_TOKEN_KEY, accessToken, {
       path: "/",
       expires: TOKEN_EXPIRES,
       secure: !import.meta.env.DEV,

@@ -2,8 +2,17 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva, type VariantProps } from "class-variance-authority"
-
 import { cn } from "@/lib/utils"
+
+const commonVariants = {
+  intent: {
+    default: "",
+    error: "text-destructive",
+    warning: "text-amber-500 dark:text-amber-400",
+    success: "text-green-600 dark:text-green-400",
+    info: "text-blue-600 dark:text-blue-400",
+  }
+};
 
 // Heading variants using cva
 const headingVariants = cva(
@@ -18,17 +27,11 @@ const headingVariants = cva(
         h5: "text-lg scroll-m-20",
         h6: "text-base scroll-m-20",
       },
-      color: {
-        default: "",
-        error: "text-destructive",
-        warning: "text-amber-500 dark:text-amber-400",
-        success: "text-green-600 dark:text-green-400",
-        info: "text-blue-600 dark:text-blue-400",
-      }
+      ...commonVariants,
     },
     defaultVariants: {
       size: "h1",
-      color: "default",
+      intent: "default",
     },
   }
 )
@@ -56,19 +59,13 @@ const textVariants = cva(
         normal: "",
         italic: "italic",
       },
-      color: {
-        default: "",
-        error: "text-destructive",
-        warning: "text-amber-500 dark:text-amber-400",
-        success: "text-green-600 dark:text-green-400",
-        info: "text-blue-600 dark:text-blue-400",
-      }
+      ...commonVariants,
     },
     defaultVariants: {
       variant: "default",
       weight: "normal",
       textStyle: "normal",
-      color: "default",
+      intent: "default",
     },
   }
 )
@@ -81,11 +78,11 @@ interface HeadingProps
   as?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6"
 }
 
-function Heading({ className, size, color, as, asChild = false, ...props }: HeadingProps) {
-  const Comp = asChild ? Slot : as || (size as any) || "h1"
+function Heading({ className, size, intent, as, asChild = false, ...props }: HeadingProps) {
+  const Comp = asChild ? Slot : as || size || "h1"
   return (
     <Comp
-      className={cn(headingVariants({ size, color, className }))}
+      className={cn(headingVariants({ size, intent, className }))}
       data-slot="heading"
       {...props}
     />
@@ -95,7 +92,7 @@ function Heading({ className, size, color, as, asChild = false, ...props }: Head
 // Text component
 interface TextProps
   extends React.HTMLAttributes<HTMLParagraphElement>,
-    VariantProps<typeof textVariants> {
+  VariantProps<typeof textVariants> {
   asChild?: boolean
   as?: React.ElementType
 }
@@ -105,7 +102,7 @@ function Text({
   variant,
   weight,
   textStyle,
-  color,
+  intent,
   as,
   asChild = false,
   ...props
@@ -113,7 +110,7 @@ function Text({
   const Comp = asChild ? Slot : as || "p"
   return (
     <Comp
-      className={cn(textVariants({ variant, weight, textStyle, color, className }))}
+      className={cn(textVariants({ variant, weight, textStyle, intent, className }))}
       data-slot="text"
       {...props}
     />

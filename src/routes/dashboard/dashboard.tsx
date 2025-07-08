@@ -85,7 +85,7 @@ const Dashboard = () => {
       <CardContent>
         <Form onSubmit={onSubmitSyncJira}>
           <Actions
-            onChangeRange={setRange}
+            onChangeRange={(value) => setRange(value as DateRange)}
             onFetchEvents={onFetchEvents}
             isLoading={isLoading}
             isLoadingActivites={isLoadingActivites}

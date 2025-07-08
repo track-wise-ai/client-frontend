@@ -13,7 +13,7 @@ const action: ActionFunction = async ({ request }) => {
   };
 
   try {
-    await api("/signup", { method: "POST", data: userData });
+    await api("/auth/signup", { method: "POST", data: userData });
 
     toast("Signup successfully. Now you can login.");
 

@@ -9,10 +9,7 @@ type Props = {
 const AIFields: FC<Props> = ({ ai }) => {
   return (
     <section>
-      <AIModelsSelect
-        models={ai.models}
-        selectedModel={ai.selectedModel}
-      />
+      <AIModelsSelect {...ai}/>
     </section>
   );
 };

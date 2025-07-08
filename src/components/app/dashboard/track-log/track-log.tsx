@@ -35,8 +35,8 @@ const TrackLog: FC<Props> = ({ track }) => {
                 <TableCell className="align-top">
                   <Checkbox name="selectedActivities" defaultChecked value={dateKey} />
                 </TableCell>
-                <TableCell className="w-1/2 break-words"><Events events={events} /></TableCell>
-                <TableCell className="w-1/2 break-words">
+                <TableCell className="align-top w-1/2 break-words"><Events events={events} /></TableCell>
+                <TableCell className="align-top w-1/2 break-words">
                   {activity && <Activity activity={activity} />}
                 </TableCell>
               </TableRow>

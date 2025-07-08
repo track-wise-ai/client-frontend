@@ -26,7 +26,7 @@ const useActivities: UseActivities = () => {
     }
 
     try {
-      const rawJson = (res?.data?.choices || [])[0]?.message?.content || "[]";
+      const rawJson = res?.data || "[]";
       const cleaned = rawJson.match(/\[[\s\S]*]/)?.[0] || "[]";
       const parsedActivities = JSON.parse(cleaned);
       setActivites(parsedActivities);

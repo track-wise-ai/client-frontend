@@ -2,9 +2,9 @@ import { Earth, CheckCheck } from "lucide-react";
 import { Button } from "@/components/ui";
 import { MultiSelect } from "@/components/form";
 import type { FC } from "react";
-import type { GoogleCalendarSettings } from "@/types";
+import type { Settings } from "@/types";
 
-type Props = { google: GoogleCalendarSettings };
+type Props = { google?: Settings['google'] };
 
 const ConnectService: FC<{ connect: boolean, link: string }> = ({ connect, link }) => {
   return connect ? (
@@ -18,8 +18,13 @@ const ConnectService: FC<{ connect: boolean, link: string }> = ({ connect, link 
   )
 };
 
-const GoogleFields: FC<Props> = ({ google }) => {
-  const { connect, authUrl, calendars, selectedCalendars } = google;
+const GoogleFields: FC<Props> = ({ google = {} }) => {
+  const {
+    connect = false,
+    authUrl = '',
+    calendars = [],
+    selectedCalendars = [],
+  } = google;
   const options = (calendars || []).map((calendar) => ({
     value: calendar.id,
     label: calendar.summary,

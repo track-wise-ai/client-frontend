@@ -16,14 +16,14 @@ type Props = {
 };
 
 const JiraFields: FC<Props> = ({ jira }) => {
-  const [jiraAuthType, setJiraAuthType] = useState<string>(jira.authType);
+  const [jiraAuthType, setJiraAuthType] = useState<string>(jira?.authType ?? "bearer");
 
   return (
     <>
-      <FormField id="jiraUrl" type="text" label="Jira Url" defaultValue={jira.url} />
-      <FormField id="jiraIssueKey" type="text" label="Jira Issue Key" defaultValue={jira.issueKey} />
+      <FormField id="jiraUrl" type="text" label="Jira Url" defaultValue={jira?.url} />
+      <FormField id="jiraIssueKey" type="text" label="Jira Issue Key" defaultValue={jira?.issueKey} />
       <FormField id="jiraAuthType" label="Jira Auth Type">
-        <Select name="jiraAuthType" defaultValue={jira.authType} onValueChange={setJiraAuthType}>
+        <Select name="jiraAuthType" defaultValue={jiraAuthType} onValueChange={setJiraAuthType}>
           <SelectTrigger>
             <SelectValue placeholder="Select a auth type" />
           </SelectTrigger>
@@ -38,9 +38,9 @@ const JiraFields: FC<Props> = ({ jira }) => {
         </Select>
       </FormField>
       {jiraAuthType === "basic" && (
-        <FormField id="jiraEmail" type="text" label="Jira User Email" defaultValue={jira.email} />
+        <FormField id="jiraEmail" type="text" label="Jira User Email" defaultValue={jira?.email} />
       )}
-      <FormField id="jiraApiKey" type="text" label="Jira Api Key" defaultValue={jira.apiKey} />
+      <FormField id="jiraApiKey" type="text" label="Jira Api Key" defaultValue={jira?.apiKey} />
     </>
   );
 };
