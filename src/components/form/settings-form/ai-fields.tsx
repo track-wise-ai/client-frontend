@@ -1,4 +1,5 @@
-import { AIModelsSelect } from "@/components/form";
+import { AIModelsSelect, FormField } from "@/components/form";
+import { Textarea } from "@/components/ui";
 import type { FC } from "react";
 import type { UserSettings } from "@/types";
 
@@ -9,7 +10,13 @@ type Props = {
 const AIFields: FC<Props> = ({ ai }) => {
   return (
     <section>
-      <AIModelsSelect {...ai}/>
+      <FormField id="aiModel" label="AI Model">
+        <AIModelsSelect {...ai}/>
+      </FormField>
+
+      <FormField id="fineTuning" label="Fine Tuning">
+        <Textarea name='fineTuning' defaultValue={ai?.fineTuning ?? ''} />
+      </FormField>
     </section>
   );
 };

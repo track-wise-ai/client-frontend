@@ -52,6 +52,7 @@ export type UserSettings = Partial<{
     models?: AIModels;
     selectedModel?: string;
     selectedProvider?: string;
+    fineTuning?: string;
   },
 }>;
 

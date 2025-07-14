@@ -9,6 +9,25 @@ type UseActivities = () => {
   generateActivites: (events: Event[]) => Promise<void>;
 }
 
+const parseActivities = (rawJson?: string): Activity[] => {
+  let activites: Activity[] = [];
+
+  if (Array.isArray(rawJson)) {
+    return rawJson;
+  }
+
+  try {
+    activites = JSON.parse(rawJson || "[]");
+  } catch { /* nothing todo */ }
+
+  try {
+    const cleaned = `${rawJson}`.match(/\[[\s\S]*]/)?.[0] || "[]";
+    activites = JSON.parse(cleaned);
+  } catch { /* nothing todo */ }
+
+  return activites;
+}
+
 const useActivities: UseActivities = () => {
   const [activites, setActivites] = useState<Activity[]>([]);
   const [loading, setLoading] = useState(false);
@@ -26,9 +45,7 @@ const useActivities: UseActivities = () => {
     }
 
     try {
-      const rawJson = res?.data || "[]";
-      const cleaned = rawJson.match(/\[[\s\S]*]/)?.[0] || "[]";
-      const parsedActivities = JSON.parse(cleaned);
+      const parsedActivities = parseActivities(res?.data);
       setActivites(parsedActivities);
     } catch (error) {
       console.error(error);

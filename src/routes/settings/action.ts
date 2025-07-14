@@ -25,6 +25,7 @@ const action: ActionFunction = async ({ request }) => {
     jiraEmail: formData.get("jiraEmail"),
     aiModel,
     aiProvider,
+    aiFineTuning: formData.get("fineTuning"),
   };
 
   try {
