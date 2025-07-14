@@ -8,6 +8,7 @@ import type { UserSettings } from "@/types";
 const loader: LoaderFunction = async () => {
   try {
     const { data: googleSettings } = await api.get("/google/auth-link");
+    const { data: summaryLevels } = await api.get("/ai/summary-levels");
     const { data: userSettings } = await api.get<UserSettings>("/settings");
     const { data: calendars } = await api.get("/google/calendars")
       .catch(() => {
@@ -18,7 +19,7 @@ const loader: LoaderFunction = async () => {
     return {
       google: { ...googleSettings, ...userSettings.google, calendars },
       jira: userSettings?.jira ?? {},
-      ai: userSettings?.ai ?? {},
+      ai: { ...userSettings?.ai, summaryLevels },
     };
   } catch (error) {
     if (isRouteErrorResponse(error) && error?.status === 401) {

@@ -26,6 +26,7 @@ const action: ActionFunction = async ({ request }) => {
     aiModel,
     aiProvider,
     aiFineTuning: formData.get("fineTuning"),
+    aiSummaryLevel: formData.get("summaryLevel"),
   };
 
   try {

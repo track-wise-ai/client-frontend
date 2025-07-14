@@ -10,6 +10,8 @@ export type AIModel = {
   models: string[],
 };
 
+export type SummaryLevel = 'low' | 'medium' | 'high';
+
 export type AIModels = Record<string, AIModel>;
 
 export type Event = {
@@ -53,6 +55,8 @@ export type UserSettings = Partial<{
     selectedModel?: string;
     selectedProvider?: string;
     fineTuning?: string;
+    selectedSummaryLevel?: 'low' | 'medium' | 'high';
+    summaryLevels?: Record<SummaryLevel, string>;
   },
 }>;
 
